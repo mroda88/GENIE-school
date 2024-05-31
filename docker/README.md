@@ -21,21 +21,21 @@ To do so, follow the instructions available on the docker wiki:
 ## Get the code
 With Docker Desktop open, start a terminal (standard one for Linux and Mac, [like this](https://docs.docker.com/desktop/wsl/use-wsl/) for Windows with WSL).
 From the terminal, create a working directory, access it, and clone this repository:
-```
-$ mkdir /your/working/folder
-$ cd /your/working/folder
-$ git clone https://github.com/mroda88/GENIE-school.git
+```console
+mkdir /your/working/folder
+cd /your/working/folder
+git clone https://github.com/mroda88/GENIE-school.git
 ```
 This will create the `GENIE-school` folder, with all the needed scripts and files. Go to the `docker` folder inside it:
-```
-$ cd GENIE-school/docker
+```console
+cd GENIE-school/docker
 ```
 In this folder, among other files, there is the dockerfile with all the instructions needed to install Genie and its dependencies.
 
 ## Build the image
 From the docker folder, we can now start to build the image. First, since we haven't done it yet, check whether or not docker is running. Simply run the command
-```
-$ docker
+```console
+docker
 ```
 If docker is running you should get a long help message, starting with
 <!-- to do: write what to do if docker is not running-->
@@ -59,11 +59,11 @@ Common Commands:
  info        Display system-wide information
 ```
 If everything is going as expected, simply run
-```
-$ docker build -t genie-inss .
+```console
+docker build -t genie-inss .
 ```
 This will create an image from the instructions in the dockerfile. It should look like:
-```
+```console
 [+] Building 1229.1s (5/6) docker:desktop-linux
  => [internal] load .dockerignore
  => => transferring context: 65B 
@@ -91,19 +91,19 @@ To do so, download an X11 server on your machine:
  * To do (but it is probably already included)
 
 With the server on, run
-```
-$ xhost + 127.0.0.1
+```console
+xhost + 127.0.0.1
 ```
 
 ## Run the container
 You can now run the container! Simply run
-```
-$ docker run -e DISPLAY=host.docker.internal:0 -it --name genie-inss-container genie-inss
+```console
+docker run -e DISPLAY=host.docker.internal:0 -it --name genie-inss-container genie-inss
 ```
 
 This will launch and enter the container. The shell should be something like this now:
-```
-$ root@63bfd1d6f2e3:/INSS# 
+```console
+root@63bfd1d6f2e3:/INSS# 
 ```
 In the INSS folder there will be few folders of all the installed software:
  * ROOT6
@@ -113,9 +113,9 @@ In the INSS folder there will be few folders of all the installed software:
  * THAT
 
 From here, test if the display is working running
-```
-$ root@730a97de8de2:/INSS# root -l
-$ root [0] TBrowser f
+```console
+root@730a97de8de2:/INSS# root -l
+root [0] TBrowser f
 ```
 if the TBrowser opens, great! We are done with the installation! Use the container as if it is a standard Ubuntu shell.
 
@@ -123,15 +123,15 @@ if the TBrowser opens, great! We are done with the installation! Use the contain
 When you are done with Genie, close the container with either `ctrl+D` or by typing `exit`.
 
 To restart the container and maintain all the work done, run
-```
-$ docker start -i genie-inss-container
+```console
+docker start -i genie-inss-container
 ```
 
 If you forgot to give a name to your container, run
-```
-$ docker ps -a
+```console
+docker ps -a
 ```
 this will print a list of all the containers run in the past. Look for the most recent and check its ID. With the ID, run
-```
-$ docker start -i <containerID>
+```console
+docker start -i <containerID>
 ```
