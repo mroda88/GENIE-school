@@ -66,7 +66,7 @@ RUN mkdir /INSS &&\
     make install &&\
     cd /INSS/ &&\
     # GENIE SOURCE
-    git clone https://github.com/GENIE-MC/Generator.git &&\
+    git clone https://github.com/GENIE-MC/Generator.git --branch R-3_04_02 &&\
     cd /INSS &&\
     # PYTHIA6
     source /INSS/Generator/src/scripts/build/ext/build_pythia6.sh &&\
