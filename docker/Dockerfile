@@ -91,8 +91,6 @@ RUN mkdir /INSS &&\
     export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH &&\
     export GENIE_INSTALL_DIR=/INSS/Generator/installation/ &&\
     export LD_LIBRARY_PATH=$GENIE_INSTALL_DIR/lib:$LD_LIBRARY_PATH &&\
-    export ROOTSYS=/INSS/root &&\
-    export PATH=$ROOTSYS/bin:$PATH &&\
     cd /INSS/Generator &&\
     ./configure \
     --prefix=/INSS/Generator/installation/ \
