@@ -135,3 +135,12 @@ this will print a list of all the containers run in the past. Look for the most 
 ```console
 docker start -i <containerID>
 ```
+
+
+## Some debug info
+Here is a (absolutely non-complete) list of the problems you could run into.
+
+If you see that the build of your docker is failing, try to decrease the number of cores used for the ```make``` of your docker. So you can test ```make -j4``` or ```make -j1``` by editing the [Dockerfile](https://github.com/mroda88/GENIE-school/blob/119b86e5c6ef8908b1eff82cb091cf159f7ec310/docker/Dockerfile#L122). It could also be very important to reduce the use of your computer while doing this since ROOT compilation can be quite resource-demanding. An idea is to leave this run overnight and check on it in the morning. 
+
+
+
