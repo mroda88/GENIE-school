@@ -17,15 +17,15 @@ To do so, follow the instructions available on the docker wiki:
  * [Instruction for Linux](https://docs.docker.com/desktop/install/linux-install/)
 
  After the installation, launch Docker Desktop. 
- If you want to use a pre-buit image, go to the [Get a prebuilt image](##-get-a-pre-built-image). 
- If you want to build it yourself, go to the [Get the code section](##-get-the-code).
+ If you want to use a pre-buit image, go to the [Get a prebuilt image](#get-a-pre-built-image). 
+ If you want to build it yourself, go to the [Get the code section](#get-the-code).
 
 ## Get a pre built image
 From the Docker Desktop app, use the search bar and search the `genie-inss` images. Two images should appear:
  * valerpia/genie-inns, an image built for the arm architecture
  * valerpia/genie-inns-amd64, an image built for the amd64 architecture
 
-Click on the pull button of the wanted version. This will download the image and, after the download, it can be run as described starting from the [Exporting X11](##-exporting-x11) section.
+Click on the pull button of the wanted version. This will download the image and, after the download, it can be run as described starting from the [Exporting X11](#exporting-x11) section.
 
 ## Get the code
 With Docker Desktop open, start a terminal (standard one for Linux and Mac, [like this](https://docs.docker.com/desktop/wsl/use-wsl/) for Windows with WSL).
