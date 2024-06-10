@@ -16,7 +16,16 @@ To do so, follow the instructions available on the docker wiki:
  * [Instruction for Windows](https://docs.docker.com/desktop/install/windows-install/), select WSL or Hyper-V instruction based on your preference. [Here](https://docs.docker.com/desktop/wsl/) there are more instructions on using docker with the WSL
  * [Instruction for Linux](https://docs.docker.com/desktop/install/linux-install/)
 
- After the installation, launch Docker Desktop. For the moment keep it open and forget about it.
+ After the installation, launch Docker Desktop. 
+ If you want to use a pre-buit image, go to the [Get a prebuilt image](##-get-a-pre-built-image). 
+ If you want to build it yourself, go to the [Get the code section](##-get-the-code).
+
+## Get a pre built image
+From the Docker Desktop app, use the search bar and search the `genie-inss` images. Two images should appear:
+ * valerpia/genie-inns, an image built for the arm architecture
+ * valerpia/genie-inns-amd64, an image built for the amd64 architecture
+
+Click on the pull button of the wanted version. This will download the image and, after the download, it can be run as described starting from the [Exporting X11](##-exporting-x11) section.
 
 ## Get the code
 With Docker Desktop open, start a terminal (standard one for Linux and Mac, [like this](https://docs.docker.com/desktop/wsl/use-wsl/) for Windows with WSL).
@@ -117,7 +126,24 @@ From here, test if the display is working running
 root@730a97de8de2:/INSS# root -l
 root [0] TBrowser f
 ```
-if the TBrowser opens, great! We are done with the installation! Use the container as if it is a standard Ubuntu shell.
+if the TBrowser opens, great! We are just missing few exports and we are done. From wherever in the container, run
+```console
+export GENIE=/INSS/Generator
+export LHAPDF=/INSS/LHAPDF-6.5.4
+export PATH=$LHAPDF/bin:$PATH
+export LD_LIBRARY_PATH=$LHAPDF/install/lib:$LD_LIBRARY_PATH
+export LHAPDF_DATA_PATH=$LHAPDF/share/LHAPDF
+export LD_LIBRARY_PATH=/INSS/LHAPDF-6.5.4/installation/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/INSS/v6_428/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+export GENIE_INSTALL_DIR=/INSS/Generator/installation/
+export LD_LIBRARY_PATH=$GENIE_INSTALL_DIR/lib:$LD_LIBRARY_PATH
+```
+We are now done with the installation! You can test it with (it will take hours to complete, just check that it is launched correctly):
+
+cd /INSS/Generator/installation/bin
+./gmkspl -p 14,-14 -t 1000260560 -n 1 -e 20
+
 
 ## Stop and restart the container
 When you are done with Genie, close the container with either `ctrl+D` or by typing `exit`.
@@ -140,10 +166,6 @@ docker start -i <containerID>
 ## Some debug info
 Here is a (absolutely non-complete) list of the problems you could run into.
 
-If you see that the build of your docker is failing, try to decrease the number of cores used for the ```make``` of your docker. So you can test ```make -j4``` or ```make -j1``` by editing the [Dockerfile](https://github.com/mroda88/GENIE-school/blob/119b86e5c6ef8908b1eff82cb091cf159f7ec310/docker/Dockerfile#L122). It could also be very important to reduce the use of your computer while doing this since ROOT compilation can be quite resource-demanding. An idea is to leave this run overnight and check on it in the morning. 
+* If you see that the build of your docker is failing, try to decrease the number of cores used for the ```make``` of your docker. So you can test ```make -j4``` or ```make -j1``` by editing the [Dockerfile](https://github.com/mroda88/GENIE-school/blob/119b86e5c6ef8908b1eff82cb091cf159f7ec310/docker/Dockerfile#L122). It could also be very important to reduce the use of your computer while doing this since ROOT compilation can be quite resource-demanding. An idea is to leave this run overnight and check on it in the morning. 
 
-You can try to build a container from images that have already been build for you. 
-You can find those directly from the search bar of your Docker desktop app.
-- valerpia/genie-inss
-- valerpia/genie-inss-amd64 (if you have a mac with a arm chip, try also this one if the other one did not work)
-
+* Sometimes when using a pre-built image, the container will silently die after the run command. We don't know why (if you do, let us know). If this is the case, you have to build the image yourself using the guide above.
