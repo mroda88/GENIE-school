@@ -140,10 +140,10 @@ export GENIE_INSTALL_DIR=/INSS/Generator/installation/
 export LD_LIBRARY_PATH=$GENIE_INSTALL_DIR/lib:$LD_LIBRARY_PATH
 ```
 We are now done with the installation! You can test it with (it will take hours to complete, just check that it is launched correctly):
-
+```console
 cd /INSS/Generator/installation/bin
 ./gmkspl -p 14,-14 -t 1000260560 -n 1 -e 20
-
+```
 
 ## Stop and restart the container
 When you are done with Genie, close the container with either `ctrl+D` or by typing `exit`.
